@@ -1,2 +1,2 @@
-# PythonLesson1
+# PythonLessons
 testPythonAndGitHub
