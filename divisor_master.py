@@ -20,7 +20,6 @@ def min(list_a):
     else:
         return []
 
-
 def max(list_a):
     ''' max значение в списке'''
     if list_a != []:
@@ -34,14 +33,12 @@ def max(list_a):
     else:
         return []
 
-
 def devisor(a, b):
     ''' Является ли b делителем числа a без остатка'''
     if a % b == 0:
         return b
     else:
         return 0
-
 
 def simple(a):
     '''проверка числа на простоту'''
@@ -54,7 +51,6 @@ def simple(a):
     else:
         return 0
 
-
 def devisors(a):
     '''выводит список всех делителей числа'''
     devisors_list = []
@@ -65,7 +61,6 @@ def devisors(a):
             continue
     return devisors_list
 
-
 def simple_devisor(a):
     '''Выводит список простых делителей числа'''
     list_b = devisors(a)
@@ -74,7 +69,6 @@ def simple_devisor(a):
         if simple(i):
             simple_devisor_list.append(i)
     return simple_devisor_list
-
 
 def prime_factorization(a):
     '''Каноническое разложение числа на простые множители'''
@@ -90,14 +84,12 @@ def prime_factorization(a):
             continue
     return prime_factorization_list
 
-
 def devisor_not_num(a):
     ''' Делители числа большего 1, не равные самому числу'''
     devisor_list = devisors(a)
     if a != 1:  # Если число равно 1 вернёт единственный делитель:1
         devisor_list.remove(a)
     return devisor_list
-
 
 def greatest_common_divisor(list_n):
     '''Наибольший общий делитель чисел'''
