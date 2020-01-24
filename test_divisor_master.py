@@ -1,7 +1,6 @@
 from divisor_master import simple, devisors, simple_devisor, max, min, prime_factorization, devisor_not_num, \
     greatest_common_divisor
 
-
 def test_1_devisors():
     assert devisors(383) == [1, 383]
 
@@ -24,3 +23,4 @@ def test_5_devisor_not_num():
     for k in simp_num:
         devisor_not_num(k)
         assert devisor_not_num(k) == [1]
+        
