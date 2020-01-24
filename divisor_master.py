@@ -111,7 +111,6 @@ def greatest_common_divisor(list_n):
                 if x == y:
                     common_divisor_list.append(y)
         list_a = list(common_divisor_list)
-        common_divisor_list.clear()
     return max(list_a)
 
 '''Test'''
