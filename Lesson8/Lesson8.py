@@ -46,6 +46,6 @@ def gen_num2(a):
 
 a=list_num(100000)
 
-b=(gen_num(100000))
+b=gen_num(100000)
 
 c=gen_num2(100000)
