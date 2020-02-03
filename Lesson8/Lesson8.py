@@ -68,12 +68,12 @@ def gen_num2(a):
 a = list_num(100000)
 
 b = gen_num(100000)
-print(next(b))
+#print(next(b))
 # for i in b:
 #     print(i)
 
 c = gen_num2(100000)
-print(next(c))
+#print(next(c))
 #
 # for i in c:
 #     print(i)
