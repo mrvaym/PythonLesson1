@@ -30,7 +30,7 @@ def show_memory_2(f):
         tracemalloc.start()
         a = f(*args, **kwargs)
         memory_size = tracemalloc.get_traced_memory()
-        print(f'Использование памяти:{memory_size[0]}байт MAX:{memory_size[1]}байт')
+        print(f'Использование памяти:{memory_size[0]} байт MAX:{memory_size[1]} байт')
         tracemalloc.stop()
         return a
 
