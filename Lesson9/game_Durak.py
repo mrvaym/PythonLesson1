@@ -42,18 +42,18 @@ class Durak():
                 else:
                     break
 
-    def queue(self, num): # Очередность хода
+    def queue(self, num):  # Очередность хода
         a = self.players[:num]
         b = self.players[num:]
         b.extend(a)
 
         return b
 
-    def print_players_hands(self): # печать карт на руках (отладка)
+    def print_players_hands(self):  # печать карт на руках (отладка)
         for i in self.players:
             print(i, i.get_hand())
 
-    def print_players_trumps(self): # печать козырей на руках(отладка)
+    def print_players_trumps(self):  # печать козырей на руках(отладка)
         for i in self.players:
             without_trumps = i.get_hand() - i.hand_trumps()
 
@@ -65,7 +65,7 @@ class Durak():
             # Ходит у кого меньший козырь
             for n in self.players:
                 trumps = n.hand_trumps()
-                #print(f'Козыри на руках {n} {trumps}')
+                # print(f'Козыри на руках {n} {trumps}')
                 if trumps != []:
                     x = trumps.min_in_list()
                     if x.lower(card):
@@ -94,7 +94,7 @@ class Durak():
                 for i in self.players:  # Все могут подкинуть
                     if i != self.defense_player:
                         i.set_can_pitch(1)
-                self.print_players_hands()
+                #self.print_players_hands()
                 return True
             else:
                 print('нечем бить')
@@ -115,21 +115,21 @@ class Durak():
         # self.print_players_hands()
         # self.print_players_trumps()
         while len(self.players) > 1:
-            print(f' {self.trump_suit_print} {"|"*len(self.deck)} ')
-            if self.cards_on_table == []: # Если новый ход
+            print(f' Козырь: {self.trump_suit_print} {"|" * len(self.deck)} ')
+            if self.cards_on_table == []:  # Если новый ход
                 self.whose_attack()
-                if len(self.attack_player.get_hand()): # у игрока есть карты на руках
+                if len(self.attack_player.get_hand()):  # у игрока есть карты на руках
                     attack_card = self.attack_player.attack()
                     print(f'{self.attack_player} ходит {attack_card}')
                     if self.play_card(attack_card):  # если отбил
                         continue
                 else:
-                    self.players.remove(self.attack_player) # нет карт на руках - вышел из игры
+                    self.players.remove(self.attack_player)  # нет карт на руках - вышел из игры
 
-            else: # иначе подкидываем
+            else:  # иначе подкидываем
                 for i in self.players:
-                    while i.get_can_pitch() == 1: # установлен флаг, что может подкинуть
-                        if i!=self.defense_player:
+                    while i.get_can_pitch() == 1:  # установлен флаг, что может подкинуть
+                        if i != self.defense_player:
                             pitch_player = i
                             # print(pitch_player)
                             if self.defense_player.get_hand() != [] or (len(self.cards_on_table) / 2) < 6:
@@ -140,7 +140,8 @@ class Durak():
                                         continue
                                     else:  # Не отбил
                                         self.defense_player.abandon_defense(self.cards_on_table)
-                                        self.players = self.queue(self.players.index(self.defense_player))  # Пропускает ход
+                                        self.players = self.queue(
+                                            self.players.index(self.defense_player))  # Пропускает ход
                                         self.whose_attack()
                                         break
                                 else:
@@ -150,10 +151,10 @@ class Durak():
                 self.cards_on_table.clear()
                 self.deal()
                 self.players = self.queue(self.players.index(self.defense_player))
-                self.print_players_hands()
+                #self.print_players_hands()
                 continue
         print(f'Проиграл {self.defense_player}')
-        self.print_players_hands()
+        #self.print_players_hands()
 
         # print(self.cards_on_table)
 
@@ -279,9 +280,6 @@ class Player:
         self.__name = name  # Имя игрока
         self.__can_pitch = 1
 
-    # def __repr__(self):
-    #     return self.get_name()
-
     def __str__(self):
         return self.get_name()
 
@@ -343,10 +341,10 @@ class Human(Player):
 
     def defense(self, attack_card):  # Отбиваемся
         # print(f'Противник сходил: {attack_card}')
-        print(f'Ваши карты: {self.print_hand()} другое - "Взять карты"')
+        print(f'Ваши карты: {self.print_hand()} {len(self.get_hand())} - "Взять карты"')
         x = int(input(f'Выберите чем ходить: '))
-        if x<len(self.get_hand()):
-            defense_card =self.get_hand()[x]
+        if x != len(self.get_hand()):
+            defense_card = self.get_hand()[x]
             if defense_card.beat(attack_card):
                 self.remove_hand(defense_card)
                 return defense_card
@@ -355,15 +353,16 @@ class Human(Player):
             return False
         else:
             return False
+
     def pitch(self, cards_on_table):  # Подкидываем
-        equal_on_table=Deck()
+        equal_on_table = Deck()
         for i in cards_on_table:
-            equal_on_table.extend( self.get_hand().equal_in_list(i))
+            equal_on_table.extend(self.get_hand().equal_in_list(i))
         if equal_on_table != []:
             print(f'Карты на столе: {cards_on_table}')
-            print(f'Ваши карты: {self.print_hand()} другое - "Не подкидывать"')
+            print(f'Ваши карты: {self.print_hand()} {len(self.get_hand())} - "Не подкидывать"')
             x = int(input(f'Выберите чем ходить: '))
-            if x < len(self.get_hand()):
+            if x != len(self.get_hand()):
                 pitch_card = self.get_hand()[x]
                 if cards_on_table.equal_in_list(pitch_card):
                     self.remove_hand(pitch_card)
@@ -427,9 +426,9 @@ class Computer(Player):
 
 
 if __name__ == "__main__":
-    #game = Durak({'a': 1, 'b': 1}) # Два компьютера
+    # game = Durak({'a': 1, 'b': 1}) # Два компьютера
 
-    game = Durak({'Comp': 1, 'Человек': 0}) # Компьютер против человека
+    #game = Durak({'Comp': 1, 'Человек': 0})  # Компьютер против человека
 
-    # game = Durak({'a': 1, 'b': 1, 'c': 1, 'd': 1, 'e': 1, 'f': 1}) # Шесть компьютеров
+    game = Durak({'a': 1, 'b': 1, 'c': 1, 'd': 1, 'e': 1, 'f': 1}) # Шесть компьютеров
     game.play_game()
