@@ -28,7 +28,7 @@ class Durak():
         trump_card = self.deck.pop()
         self.deck.insert(0, trump_card)
         self.trump = trump_card.suit
-        self.trump_suit_print = str(trump_card)
+        self.trump_suit_print = str(trump_card)[0]
         for i in self.deck:  # Установка козырности для карт в колоде
             if i.suit == self.trump:
                 i.istrump = True
@@ -115,7 +115,7 @@ class Durak():
         # self.print_players_hands()
         # self.print_players_trumps()
         while len(self.players) > 1:
-            print(f' Козырь: {self.trump_suit_print} {"|" * len(self.deck)} ')
+            print(f'Козырь: {self.trump_suit_print}           {self.deck[0] if len(self.deck)>0 else ""} {"|" *(len(self.deck)-1) if len(self.deck)>1 else ""} ')
             if self.cards_on_table == []:  # Если новый ход
                 self.whose_attack()
                 if len(self.attack_player.get_hand()):  # у игрока есть карты на руках
@@ -426,9 +426,9 @@ class Computer(Player):
 
 
 if __name__ == "__main__":
-    # game = Durak({'a': 1, 'b': 1}) # Два компьютера
+    game = Durak({'a': 1, 'b': 1}) # Два компьютера
 
-    game = Durak({'Comp': 1, 'Человек': 0})  # Компьютер против человека
+    #game = Durak({'Comp': 1, 'Человек': 0})  # Компьютер против человека
 
     #game = Durak({'a': 1, 'b': 1, 'c': 1, 'd': 1, 'e': 1, 'f': 1}) # Шесть компьютеров
     game.play_game()
