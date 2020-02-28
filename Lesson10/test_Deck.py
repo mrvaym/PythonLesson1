@@ -5,15 +5,15 @@ from Deck import Deck
 class Test_Deck:
 
     def setup(self):
-        pass
+        self.a = Deck(36)
 
     def tearsdown(self):
         print('Test complete!')
 
     def test_Deck(self):
-        a = Deck(36)
+
         list_a=Deck()
-        list_a.extend([a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8]])
+        list_a.extend([self.a[0],self.a[1],self.a[2],self.a[3],self.a[4],self.a[5],self.a[6],self.a[7],self.a[8]])
         shuffle(list_a)
         min_card=list_a.min_in_list()
         max_card=list_a.max_in_list()

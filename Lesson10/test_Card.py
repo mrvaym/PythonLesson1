@@ -9,11 +9,11 @@ class Test_Card:
     def tearsdown(self):
         print('Test complete!')
 
-    def test___init__(self):
+    def test_init(self):
         assert self.a.suit==1
         assert self.a.rank == 8
         assert self.a.istrump == False
-    def test___repr__(self):
+    def test_repr(self):
         assert str(self.a) == '♦A'
     def test_higher(self):
         assert self.a.higher(self.b)==True
